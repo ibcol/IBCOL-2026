@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eligibility | IBCOL 2026</title>
+    <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="css/shared.css">
+    <style>
+        .eligibility-table {
+            width: 100%; border-collapse: collapse; background: var(--glass-frost);
+            border: 1px solid var(--border-teal); backdrop-filter: blur(15px); border-radius: 4px; overflow: hidden;
+        }
+        .eligibility-table th {
+            background: rgba(92,201,231,0.12); color: var(--icy-highlight); text-transform: uppercase;
+            letter-spacing: 2px; padding: 20px; text-align: left; font-size: 0.9rem; font-weight: 800;
+            border-bottom: 1px solid var(--teal-mid);
+        }
+        .eligibility-table td {
+            padding: 25px 20px; border-bottom: 1px solid var(--border-teal); vertical-align: top; color: var(--slate-grey);
+        }
+        .eligibility-table td:first-child {
+            width: 20%; font-weight: 800; color: var(--primary-teal); text-transform: uppercase;
+            letter-spacing: 1px; font-size: 0.8rem; background: rgba(0,0,0,0.18);
+        }
+        .stream-h { color: var(--icy-highlight); margin-bottom: 8px; font-size: 1.1rem; display: block; font-weight: 700; }
+        .sub-text { font-size: 0.95rem; color: var(--slate-grey); margin: 0; line-height: 1.55; }
+        .arena-block { border: 1px solid var(--border-teal); background: var(--glass-frost); border-radius: 4px; overflow: hidden; backdrop-filter: blur(15px); margin-bottom: 40px; }
+        .arena-header { background: rgba(92,201,231,0.12); padding: 20px 25px; border-bottom: 1px solid var(--teal-mid); display: flex; align-items: center; gap: 15px; }
+        .arena-header h3 { margin: 0; font-size: 1.15rem; text-transform: uppercase; letter-spacing: 3px; color: var(--icy-highlight); font-weight: 800; }
+        .arena-content { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-teal); }
+        .arena-cell { background: var(--bg-deep); padding: 32px; color: var(--slate-grey); }
+        .label-pill { display: inline-block; background: var(--teal-dark); color: #fff; font-size: 0.72rem; font-weight: bold; padding: 5px 14px; border-radius: 3px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1.2px; }
+        .validity-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .validity-box { background: var(--glass-frost); border: 1px solid var(--border-teal); padding: 35px; border-radius: 4px; backdrop-filter: blur(15px); }
+        .validity-box h3 { color: var(--primary-teal); font-size: 1.25rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 0; margin-bottom: 25px; border-bottom: 1px solid var(--teal-mid); padding-bottom: 12px; font-weight: 800; }
+        .param-item { margin-bottom: 18px; position: relative; padding-left: 24px; }
+        .validity-box:nth-child(2) .param-item,
+        .validity-box:nth-child(3) .param-item { margin-bottom: 28px; padding-top: 4px; padding-bottom: 4px; }
+        .param-item::before { content: "■"; position: absolute; left: 0; color: var(--teal-mid); font-size: 1.1rem; }
+        .param-item b { color: var(--icy-highlight); font-size: 0.97rem; display: block; margin-bottom: 4px; }
+        .param-item p { margin: 0; font-size: 0.92rem; color: var(--slate-grey); }
+        .cta-section { text-align: center; padding: 100px 20px; }
+        .cta-title { font-size: clamp(1.8rem,7vw,2.4rem); letter-spacing: 8px; text-transform: uppercase; margin-bottom: 40px; color: var(--icy-highlight); font-weight: 900; text-shadow: 0 0 20px rgba(92,201,231,0.4); }
+        .signup-btn {
+            display: inline-block; padding: clamp(14px,4vw,18px) clamp(32px,8vw,50px);
+            border-radius: 50px; text-decoration: none; text-transform: uppercase; letter-spacing: 4px;
+            font-weight: 800; font-size: clamp(0.85rem,4vw,0.95rem); transition: all 0.3s ease;
+            background: var(--icy-highlight); color: var(--bg-deep); border: 1px solid var(--icy-highlight);
+            box-shadow: 0 10px 30px rgba(220,242,255,0.2);
+        }
+        .signup-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(220,242,255,0.4); background: white; }
+        .note-box { text-align: center; max-width: 800px; margin: 60px auto; padding: 0 20px; color: var(--teal-dark); font-size: 0.95rem; line-height: 1.7; }
+        @media (max-width: 850px) {
+            .eligibility-table, .eligibility-table tbody, .eligibility-table tr { display: block; width: 100%; box-sizing: border-box; }
+            .eligibility-table thead { display: none; }
+            .eligibility-table tr { margin-bottom: 16px; border: 1px solid var(--border-teal); border-radius: 4px; overflow: hidden; background: var(--glass-frost); }
+            .eligibility-table td { display: block; width: 100% !important; box-sizing: border-box; padding: 16px 18px; text-align: center; }
+            .eligibility-table td:first-child { background: rgba(92,201,231,0.12); border-bottom: 1px solid var(--teal-mid); }
+            .eligibility-table td:not(:first-child) { border-bottom: 1px solid var(--border-teal); }
+            .eligibility-table td:last-child { border-bottom: none; }
+            .arena-content, .validity-grid { grid-template-columns: 1fr; }
+            .section-header h2 { font-size: 2.1rem; letter-spacing: 8px; }
+            
+            /* Center text for elements except bulleted lists */
+            .arena-header { justify-content: center; text-align: center; }
+            .arena-cell { text-align: center; }
+            .validity-box h3 { text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .eligibility-table td { padding: 14px 14px; }
+            .arena-cell { padding: 22px 18px; }
+            .validity-box { padding: 24px 18px; }
+        }
+        footer {
+            width: 100%;
+            margin-top: auto;
+            padding: 0px 20px;
+            box-sizing: border-box;
+            
+            background: var(--glass-frost); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+<div class="page-content">
+<div class="container">
+    <div class="section-header reveal">
+        <h2>Eligibility</h2>
+        <p>Stream Requirements</p>
+    </div>
+    <div class="reveal">
+        <table class="eligibility-table">
+            <thead>
+                <tr><th>Category</th><th>Schoolers Stream</th><th>Students Stream</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Contestants</td>
+                    <td><b class="stream-h">ISCED Level 1-3</b><p class="sub-text">Registered student in good standing studying at the schooler level.</p></td>
+                    <td><b class="stream-h">ISCED Level 4-8</b><p class="sub-text">Registered tertiary student or recent alumni (within 3 years of cessation).</p></td>
+                </tr>
+                <tr>
+                    <td>Teams</td>
+                    <td><b class="stream-h">Schoolers Team</b><p class="sub-text">Comprised strictly only of schooler stream contestants.</p></td>
+                    <td><b class="stream-h">Students Team</b><p class="sub-text">Comprised of either only students or a mix of schoolers and students.</p></td>
+                </tr>
+                <tr>
+                    <td>Projects</td>
+                    <td><b class="stream-h">Schoolers Project</b><p class="sub-text">Registered project delivered by a Schoolers Stream Team.</p></td>
+                    <td><b class="stream-h">Students Project</b><p class="sub-text">Registered project delivered by a Students Stream Team.</p></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="divider reveal"></div>
+    <div class="section-header reveal"><h2>Competition Categories</h2><p>Project Classification</p></div>
+    <div class="arena-block reveal">
+        <div class="arena-header"><i data-lucide="layers" size="20"></i><h3>Solution Architecture (ARC)</h3></div>
+        <div class="arena-content">
+            <div class="arena-cell"><span class="label-pill">Schoolers Stream</span><p class="sub-text">The competition arena for Schoolers Stream Olympiad Projects submitted according to the parameters for the ARC Stream.</p></div>
+            <div class="arena-cell"><span class="label-pill">Students Stream</span><p class="sub-text">The competition arena for Students Stream Olympiad Projects submitted according to the parameters for the DEV Stream.</p></div>
+        </div>
+    </div>
+    <div class="arena-block reveal">
+        <div class="arena-header"><i data-lucide="code-2" size="20"></i><h3>Solution Development (DEV)</h3></div>
+        <div class="arena-content">
+            <div class="arena-cell"><span class="label-pill">Schoolers Stream</span><p class="sub-text">The competition arena for Schoolers Stream Olympiad Projects submitted according to the parameters for the DEV Stream.</p></div>
+            <div class="arena-cell"><span class="label-pill">Students Stream</span><p class="sub-text">The competition arena for Students Stream Olympiad Projects submitted according to the parameters for the DEV Stream.</p></div>
+        </div>
+    </div>
+    <div class="divider reveal"></div>
+    <div class="section-header reveal"><h2>Validity Parameters</h2><p>Criteria for Project Acceptance</p></div>
+    <div class="validity-grid reveal">
+        <div class="validity-box">
+            <h3>Team Validity</h3>
+            <div class="param-item"><b>Team Size</b><p>1 or more eligible participants per team.</p></div>
+            <div class="param-item"><b>Leadership (C/AC)</b><p>Captain and Assistant Captain must be designated for communication.</p></div>
+            <div class="param-item"><b>Supervision</b><p>Required (18+) if all members are minors.</p></div>
+            <div class="param-item"><b>Country Representation</b><p>Decided among team members.</p></div>
+        </div>
+        <div class="validity-box">
+            <h3>Project Validity</h3>
+            <div class="param-item"><b>Project Name</b><p>Must align with Name Validity.</p></div>
+            <div class="param-item"><b>Project Type</b><p>Classified as Architecture (ARC) or Development (DEV).</p></div>
+            <div class="param-item"><b>Representation</b><p>Must align with Team Validity.</p></div>
+        </div>
+        <div class="validity-box">
+            <h3>Name Validity</h3>
+            <div class="param-item"><b>Meaning &amp; IP</b><p>Project names must be descriptive and respect existing intellectual property.</p></div>
+            <div class="param-item"><b>Harmonious</b><p>No offensive, political, or unethical content allowed.</p></div>
+            <div class="param-item"><b>Length</b><p>3-4 words maximum; taglines are encouraged.</p></div>
+        </div>
+    </div>
+    <div class="note-box">KBI reserves the right to amend or disqualify a team or project if these parameters are not met or if amendments are not accepted.</div>
+    <div class="cta-section reveal">
+        <h2 class="cta-title">Innovate the Future</h2>
+        <a href="registration.html" class="signup-btn">Register NOW!</a>
+    </div>
+</div>
+</div>
+
+
+<script src="js/nav.js"></script>
+<script src="js/shared.js"></script>
+</body>
+</html>
